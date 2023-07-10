@@ -4,7 +4,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>detail</title>
+    <title>Detail</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            padding: 10px;
+            border: 1px solid #ccc;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        td {
+            text-align: left;
+        }
+
+        .button-container {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .button-container button {
+            padding: 10px 20px;
+            margin-right: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
 </head>
 
 <body>
@@ -34,18 +73,21 @@
             <td th:text="${bbs.bbsContents}"></td>
         </tr>
     </table>
-    <button onclick="list()">목록</button>
-    <button onclick="update()">수정</button>
-    <button onclick="del()">삭제</button>
-    <button onclick="write()">글쓰기</button>
+    <div class="button-container">
+        <button onclick="list()">목록</button>
+        <button onclick="update()">수정</button>
+        <button onclick="del()">삭제</button>
+    </div>
     <script th:inline="javascript">
         const list = () => {
             location.href = "/bbs/";
         }
+
         const update = () => {
             const num = [[${ bbs.num }]];
             location.href = "/bbs/update/" + num;
         }
+
         const del = () => {
             const num = [[${ bbs.num }]];
             let y = confirm("정말로 삭제하시겠습니까?");
