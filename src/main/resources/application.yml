@@ -1,0 +1,22 @@
+#서버셋팅
+server:
+    port : 9000
+
+#db 설정
+spring : 
+
+    datasource : 
+        driver-class-name : com.mysql.cj.jdbc.Driver
+        username : root
+        password : skill132@@
+        url : jdbc:mysql://localhost:3306/spbbs?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
+
+    thymeleaf : 
+        cache : false
+
+    #jpa 설정
+    jpa :  
+        open-in-view : false
+        show-sql : true
+        hibernate : 
+            ddl-auto : update

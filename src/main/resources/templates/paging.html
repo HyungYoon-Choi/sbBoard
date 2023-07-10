@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paging</title>
+</head>
+
+<body>
+    <h1 style="text-align:center; margin: 40px;">목록보기</h1>
+    <table style="width: 800px; margin: auto;">
+        <colgroup>
+            <col width="5%">
+            <col>
+            <col width="15%">
+            <col width="20%">
+            <col width="10%">
+        </colgroup>
+        <thead>
+            <tr>
+                <th>번호</th>
+                <th>제목</th>
+                <th>이름</th>
+                <th>날짜</th>
+                <th>조회수</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr align="center" th:each="list:${bbslist}">
+                <td th:text="${list.num}"></td>
+                <td><a th:text="${list.bbsTitle}" th:href="@{|/bbs/${list.num}|}"></a></td>
+                <td><a th:text="${list.bbsWriter}" th:href="@{|/bbs/${list.num}|}"></a></td>
+                <td th:text="${#temporals.format(list.bbsCreatedTime, 'yyyy-mm-dd HH시')}"></td>
+                <td th:text="${list.bbsHits}"></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- 첫번째 페이지-->
+    <a th:href="@{/bbs/paging(page=1)}">첫번째페이지</a>
+
+    <!-- 이전 페이지 버튼 3항 연산-->
+    <a th:href="${bbsList.first} ? '#': @{/bbs/paging(page=${bbsList.number})}">이전페이지</a>
+
+    <!-- 현재 페이지-->
+    <span th:each="page: ${#numbers.sequence(startPage, endPage)}">
+        <!-- 현재페이지는 링크 없이-->
+        <span th:if="${page == bbsList.number + 1}" th:text="${page}"></span>
+        <!-- 아니면 링크-->
+        <span th:unless="${page==bbsList.number+1}">
+            <a th:href="@{/bbs/paging(page=${page})}" th:text="${page}"></a>
+        </span>
+    </span>
+
+    <!-- 다음 페이지-->
+    <a th:href="${bbsList.last} ? '#': @{/bbs/paging(page=${bbsList.number + 2})}">다음페이지</a>
+
+    <!-- 마지막 페이지 -->
+    <a th:href="@{/bbs/paging(page=${bbsList.totalPages})}">마지막페이지</a>
+</body>
+
+</html>

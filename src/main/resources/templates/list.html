@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>list</title>
+</head>
+
+<body>
+    <h1 style="text-align:center; margin: 40px;">목록보기</h1>
+    <table style="width: 800px; margin: auto;">
+        <colgroup>
+            <col width="5%">
+            <col>
+            <col width="15%">
+            <col width="20%">
+            <col width="10%">
+        </colgroup>
+        <thead>
+            <tr>
+                <th>번호</th>
+                <th>제목</th>
+                <th>이름</th>
+                <th>날짜</th>
+                <th>조회수</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr align="center" th:each="list:${list}">
+                <td th:text="${list.num}"></td>
+                <td><a th:text="${list.bbsTitle}" th:href="@{|/bbs/${list.num}|}"></a></td>
+                <td><a th:text="${list.bbsWriter}" th:href="@{|/bbs/${list.num}|}"></a></td>
+                <td th:text="${#temporals.format(list.bbsCreatedTime, 'yyyy-mm-dd HH시')}"></td>
+                <td th:text="${list.bbsHits}"></td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+
+</html>

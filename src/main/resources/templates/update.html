@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update</title>
+</head>
+
+<body>
+    <form action="/bbs/update" name="updateForm" method="post">
+        <div>
+            <label>글쓴이 : </label>
+            <input type="text" name="bbsWriter" th:value="${bbs.bbsWriter}">
+        </div>
+        <div>
+            <label>비밀번호 : </label>
+            <input type="password" id="bbsPass" name="bbsPass">
+        </div>
+        <div>
+            <label>제목 : </label>
+            <input type="text" name="bbsTitle" th:value="${bbs.bbsTitle}">
+        </div>
+        <div>
+            <textarea name="bbsContents" cols="30" rows="10" th:text="${bbs.bbsContents}"></textarea>
+        </div>
+        <input type="hidden" name="num" th:value="${bbs.num}">
+        <button type="button" onclick="bbsUpdate();"> 글수정 </button>
+    </form>
+    <script th:inline="javascript">
+        const bbsUpdate = () => {
+            const ipassed = document.getElementById("bbsPass").value;
+            const pass = [[${ bbs.bbsPass }]]
+            if (pass == ipassed) {
+                document.updateForm.submit();
+            } else {
+                alert("비밀번호가 일치하지 않습니다.");
+                return false;
+            }
+        }
+    </script>
+</body>
+
+</html>
