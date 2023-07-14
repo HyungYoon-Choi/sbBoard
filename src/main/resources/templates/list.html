@@ -1,46 +1,51 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<html lang="ko">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>List</title>
+    <title>List and Chat</title>
     <link rel="stylesheet" href="/css/list.css">
 </head>
 
 <body>
     <div class="container">
-        <h1>List</h1>
-        <table>
-            <thead>
-                <tr>
-                    <th>번호</th>
-                    <th>제목</th>
-                    <th>작성자</th>
-                    <th>날짜</th>
-                    <th>조회수</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr th:each="item : ${list}">
-                    <td th:text="${item.num}"></td>
-                    <td><a th:href="@{|/bbs/${item.num}|}" th:text="${item.bbsTitle}"></a></td>
-                    <td th:text="${item.bbsWriter}"></td>
-                    <td th:text="${#temporals.format(item.bbsCreatedTime, 'yyyy-MM-dd HH:mm')}"></td>
-                    <td th:text="${item.bbsHits}"></td>
-                </tr>
-            </tbody>
-        </table>
-        <div class="button-container">
-            <a href="/bbs/save" class="button">글쓰기</a>
+        <div class="list-container">
+            <h1>List</h1>
+            <table>
+                <thead>
+                    <tr>
+                        <th>번호</th>
+                        <th>제목</th>
+                        <th>작성자</th>
+                        <th>날짜</th>
+                        <th>조회수</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="item : ${list}">
+                        <td th:text="${item.num}"></td>
+                        <td><a th:href="@{|/bbs/${item.num}|}" th:text="${item.bbsTitle}"></a></td>
+                        <td th:text="${item.bbsWriter}"></td>
+                        <td th:text="${#temporals.format(item.bbsCreatedTime, 'yyyy-MM-dd HH:mm')}"></td>
+                        <td th:text="${item.bbsHits}"></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="button-container">
+                <a href="/bbs/save" class="button">글쓰기</a>
+            </div>
         </div>
-    </div>
 
-    <div id="chat-container">
-        <div id="chat-messages"></div>
-        <div id="user-input">
-            <input type="text" placeholder="메시지를 입력하세요..." />
-            <button>전송</button>
+        <div class="chat-container">
+            <h1>Chat</h1>
+            <div id="chat-window">
+                <div id="chat-messages"></div>
+                <div id="user-input">
+                    <input type="text" placeholder="메시지를 입력하세요..." />
+                    <button>전송</button>
+                </div>
+            </div>
         </div>
     </div>
 
